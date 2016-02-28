@@ -1,5 +1,27 @@
 # Learn Google Analytics
 
+## Why?
+
+As a person *building* a web application,
+you want to know how people are *using* your app.
+
+The way *most* web apps track *usage* is using a 3rd party tool
+and the
+
+In most cases developers are *stingy* and don't want to *pay*
+for *anything*. This is why most of the *alternatives* to GA
+
+
+
+
+## Alternatives?
+
++ Mixpanel: https://mixpanel.com/
++ Keen.io: https://keen.io/ - great features. real-time. 50k events free tier.
++ Gauges: http://get.gaug.es - much simpler than GA but paid.
+ worth it for real-time stats!
++ Comparison: http://www.sitepoint.com/5-great-google-analytics-alternatives/
+
 ## Recommended Reading
 
 ### Books
@@ -7,11 +29,13 @@
 + Web Analytics: An Hour a Day by [Avinash Kaushik](https://twitter.com/avinash)
 http://www.amazon.com/Web-Analytics-An-Hour-Day/dp/0470130652
 (*gentle introduction. GA UI has changed. but concepts are the same*)
-+ Web Analytics 2.0: The Art of Online Accountability and Science of Customer Centricity
++ Web Analytics 2.0: The Art of Online Accountability
+and Science of Customer Centricity
 by [Avinash Kaushik](https://twitter.com/avinash)
 http://www.amazon.com/Web-Analytics-2-0-Accountability-Centricity/dp/0470529393
 (*the sequel to "Web Analytics: An Hour a Day" but can be read independently*)
-+ Advanced Web Metrics with Google Analytics by [Brian Clifton](https://brianclifton.com/)
++ Advanced Web Metrics with Google Analytics
+by [Brian Clifton](https://brianclifton.com/)
 http://www.amazon.com/Advanced-Web-Metrics-Google-Analytics/dp/1118168445
 (*as its title implies, this is the advanced text, so read this once you
   already have some basic experience with Analytics*...)
