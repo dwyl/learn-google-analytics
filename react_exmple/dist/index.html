@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Webpack + React</title>
+
+  </head>
+  <body>
+  <!-- Google Tag Manager -->
+  <script language="javascript">
+  dataLayer=[
+  {
+  "pageTypeURL": "/isearch/prototype/",
+  "title": "Inspirational Search"
+  }
+  ];
+  </script>
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-53SBVW"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-53SBVW');</script>
+  <!-- <script src="https://cdn.rawgit.com/robflaherty/riveted/master/riveted.min.js"></script>
+  <script>riveted.init();</script> -->
+
+  <!-- End Google Tag Manager -->
+    <div id='container'></div>
+    <script src="app.js"></script>
+
+    <script>
+    setTimeout(function(){
+      dataLayer.push({
+       'ecommerce' : {
+         'impressions' : [{
+           'id' : '123456'
+         }]
+       },
+       'event' : 'impressionsPushed'
+      });
+      console.log('datalayer.push worked');
+    }, 1000);
+    </script>
+
+  </body>
+
+</html>
