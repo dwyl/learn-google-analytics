@@ -120,6 +120,34 @@ For the Track Type, we want to use `Event`. When we select this, we're given a n
 6. You're done! You can now preview or publish your changes, and view the results on your analytics dashboard, in the `events` tab.  
 <img width="600" alt="screen shot 2017-06-01 at 11 27 17" src="https://cloud.githubusercontent.com/assets/8939909/26675852/4f779886-46bd-11e7-92b1-4318f18f0aae.png">
 
+### Data Layer
+
+For more advanced analytics, you may want to use the `dataLayer`. This requires a bit more javascript knowledge, but can allow for very flexible implementations that give you much greater control over what you track.
+
+The two uses of the data layer we're going to go through in this guide are custom variables, and custom events.
+
+1. To get started, first you need to initialise the data layer. To do this, simply add the following code to your html, just above the Google Tag Manager script:
+```
+<script>
+    dataLayer = [];
+</script>
+```
+
+2. The data layer is useful if you want to store a number of variables. To do this, you push a key-value pair into the dataLayer as you would an array. The key being the variable name you'll use to access it later.
+```
+dataLayer.push({"key": "value"});
+```
+Each key that you push to the data layer is unique, so if you push a key that already exists, the key-value pair will be overwritten.
+
+3. To trigger a custom event, you push to the data layer a key-value pair where the key is "event", and the value is the name of the event.
+```
+dataLayer.push({"event": "myCustomEvent"})
+```
+
+4. You must now configure these variables and events for use with Google Tag Manager.
+    * To set a trigger to occur whenever your custom event is called, on the Tag Manager dashboard, go to `Variables` and click `new` under `User-Defined Variables`. Here, all you have to do is choose a variable type of `Custom Event`, and give it the same name as the event you're pushing to the data layer ("myCustomEvent", above). This is now available as a trigger you can add to any tag.
+    * To configure a custom variable, do the same, but choose `Data Layer Variable`, giving it the name of your variable ("key", above). You can now access the value of this variable in the `Event Tracking Parameters` when you create a tag.
+
 ## Recommended Reading
 
 ### Books
