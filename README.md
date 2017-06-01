@@ -103,14 +103,17 @@ Tracking Page Views is nice, but you'd probably like to know a little more about
 3. Here is where you set up a trigger to occur in certain circumstances. In our case, let's say we want an event to trigger every time a user signs up to our newsletter, by clicking on a `Sign Up` button. If the HTML of our button looks like this:  
 `<button type="submit" id="newsletter-signup">Sign Up</button>`  
 Then we could use its unique `id` to reference it. We'd set up our trigger to fire on `Some Link Clicks`, with the condition of `Click ID -> equals -> newsletter-signup`. If you don't see `Click ID` in the first dropdown, you'll first need to configure Tag Manager's Built In Variables. See step 3.1 below.
-<img width="600" alt="screen shot 2017-06-01 at 11 02 59" src="https://cloud.githubusercontent.com/assets/8939909/26674912/e6234d42-46b9-11e7-8809-22f49477ce3c.png">
-    * 3.1. Go back to the dashboard and click on `Variables` in the sidebar, then `Configure`. You'll see the different kinds of built in variables Tag Manager has. For this demo we need `Click ID`, but you can select as many of them as you want. Once you've done this, go back to step 3.
+
+<img width="600" alt="screen shot 2017-06-01 at 11 02 59" src="https://cloud.githubusercontent.com/assets/8939909/26674912/e6234d42-46b9-11e7-8809-22f49477ce3c.png">  
+
+* 3.1. Go back to the dashboard and click on `Variables` in the sidebar, then `Configure`. You'll see the different kinds of built in variables Tag Manager has. For this demo we need `Click ID`, but you can select as many of them as you want. Once you've done this, go back to step 3.
 <img width="600" alt="screen shot 2017-06-01 at 10 36 56" src="https://cloud.githubusercontent.com/assets/8939909/26673866/48948e2c-46b6-11e7-948b-373d8fb328df.png">
 
 4. Now just change your trigger's name from `Untitled Trigger` on the top left to `Newsletter Signup`, and click `save`.
 
 5. Now that we've set up a `trigger`, it's time to apply it to a `tag`. You create a tag in much the same way as we did in the previous section, with the only differences being the `Trigger`, the `Track Type`. For the trigger, we'll use our new `Newsletter Signup` trigger:
 <img width="500" alt="screen shot 2017-06-01 at 11 07 19" src="https://cloud.githubusercontent.com/assets/8939909/26675183/d6209110-46ba-11e7-93ec-38c95b335e10.png">  
+
 For the Track Type, we want to use `Event`. When we select this, we're given a number of options for `Event Tracking Parameters`. These can be used to group and give names to our events, which can make them easier to analyse. Our Newsletter Signup button will be on our homepage, so we'll use that as the category, which will group it together with any other homepage events we track on or Analytics dashboard. We'll also give it an action of `Newsletter Signup` so we can identify it. These values are entirely customisable, so feel free to group your events in any way you see fit. You can also use some of Tag Managers built in variables (see 3.1 above), for example, to automatically group all events on a particular page. This can be especially useful if you're using one trigger to track multiple items, that could all be on different pages (You'd most likely use `Click Classes` rather than `Click ID` for that when creating a trigger). Once you're done with your parameters, make sure you set your settings variable that you created earlier with your Tracking ID, name your tag, and click `save`.  
 <img width="350" alt="screen shot 2017-06-01 at 11 23 34" src="https://cloud.githubusercontent.com/assets/8939909/26675743/f7092f52-46bc-11e7-8333-5ec51bdce2d6.png">
 
