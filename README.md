@@ -90,6 +90,64 @@ with a simple example of when a user visits any page:
 10. Once your update is live, you can go back to your Google Analytics dashboard, and see what pages your users are visiting:
 <img width="1232" alt="pages visited" src="https://cloud.githubusercontent.com/assets/8939909/26052667/1b728076-395e-11e7-97a5-3e35a51a18cb.png">
 
+### Event Tracking
+
+Tracking Page Views is nice, but you'd probably like to know a little more about what users are doing on your site. For this we can track `events`. If you're familiar with javascript you probably have a good idea of what an `event` is, but if not, it's some kind of change happening on the page, usually in the form of user interaction.
+
+1. To track an `event`, we first need to set up a `trigger`. Select `Triggers` from the sidebar, and click `New`.  
+<img width="400" alt="screen shot 2017-06-01 at 10 24 51" src="https://cloud.githubusercontent.com/assets/8939909/26673381/9d9a94ea-46b4-11e7-9964-001efe768c35.png">
+
+2. From here, click `Trigger Configuration` and you'll see the various types of triggers you can set. For this demo, we'll be using `Clicks -> All Elements`.  
+<img width="600" alt="screen shot 2017-06-01 at 10 59 43" src="https://cloud.githubusercontent.com/assets/8939909/26674863/badb2de4-46b9-11e7-89f4-6a63089897b0.png">
+
+3. Here is where you set up a trigger to occur in certain circumstances. In our case, let's say we want an event to trigger every time a user signs up to our newsletter, by clicking on a `Sign Up` button. If the HTML of our button looks like this:  
+`<button type="submit" id="newsletter-signup">Sign Up</button>`  
+Then we could use its unique `id` to reference it. We'd set up our trigger to fire on `Some Link Clicks`, with the condition of `Click ID -> equals -> newsletter-signup`. If you don't see `Click ID` in the first dropdown, you'll first need to configure Tag Manager's Built In Variables. See step 3.1 below.
+
+<img width="600" alt="screen shot 2017-06-01 at 11 02 59" src="https://cloud.githubusercontent.com/assets/8939909/26674912/e6234d42-46b9-11e7-8809-22f49477ce3c.png">  
+
+* 3.1. Go back to the dashboard and click on `Variables` in the sidebar, then `Configure`. You'll see the different kinds of built in variables Tag Manager has. For this demo we need `Click ID`, but you can select as many of them as you want. Once you've done this, go back to step 3.
+<img width="600" alt="screen shot 2017-06-01 at 10 36 56" src="https://cloud.githubusercontent.com/assets/8939909/26673866/48948e2c-46b6-11e7-948b-373d8fb328df.png">
+
+4. Now just change your trigger's name from `Untitled Trigger` on the top left to `Newsletter Signup`, and click `save`.
+
+5. Now that we've set up a `trigger`, it's time to apply it to a `tag`. You create a tag in much the same way as we did in the previous section, with the only differences being the `Trigger`, the `Track Type`. For the trigger, we'll use our new `Newsletter Signup` trigger:
+<img width="500" alt="screen shot 2017-06-01 at 11 07 19" src="https://cloud.githubusercontent.com/assets/8939909/26675183/d6209110-46ba-11e7-93ec-38c95b335e10.png">  
+
+For the Track Type, we want to use `Event`. When we select this, we're given a number of options for `Event Tracking Parameters`. These can be used to group and give names to our events, which can make them easier to analyse. Our Newsletter Signup button will be on our homepage, so we'll use that as the category, which will group it together with any other homepage events we track on or Analytics dashboard. We'll also give it an action of `Newsletter Signup` so we can identify it. These values are entirely customisable, so feel free to group your events in any way you see fit. You can also use some of Tag Managers built in variables (see 3.1 above), for example, to automatically group all events on a particular page. This can be especially useful if you're using one trigger to track multiple items, that could all be on different pages (You'd most likely use `Click Classes` rather than `Click ID` for that when creating a trigger). Once you're done with your parameters, make sure you set your settings variable that you created earlier with your Tracking ID, name your tag, and click `save`.  
+<img width="350" alt="screen shot 2017-06-01 at 11 23 34" src="https://cloud.githubusercontent.com/assets/8939909/26675743/f7092f52-46bc-11e7-8333-5ec51bdce2d6.png">
+
+6. You're done! You can now preview or publish your changes, and view the results on your analytics dashboard, in the `events` tab.  
+<img width="600" alt="screen shot 2017-06-01 at 11 27 17" src="https://cloud.githubusercontent.com/assets/8939909/26675852/4f779886-46bd-11e7-92b1-4318f18f0aae.png">
+
+### Data Layer
+
+For more advanced analytics, you may want to use the `dataLayer`. This requires a bit more javascript knowledge, but can allow for very flexible implementations that give you much greater control over what you track.
+
+The two uses of the data layer we're going to go through in this guide are custom variables, and custom events.
+
+1. To get started, first you need to initialise the data layer. To do this, simply add the following code to your html, just above the Google Tag Manager script:
+```
+<script>
+    dataLayer = [];
+</script>
+```
+
+2. The data layer is useful if you want to store a number of variables. To do this, you push a key-value pair into the dataLayer as you would an array. The key being the variable name you'll use to access it later.
+```
+dataLayer.push({"key": "value"});
+```
+Each key that you push to the data layer is unique, so if you push a key that already exists, the key-value pair will be overwritten.
+
+3. To trigger a custom event, you push to the data layer a key-value pair where the key is "event", and the value is the name of the event.
+```
+dataLayer.push({"event": "myCustomEvent"})
+```
+
+4. You must now configure these variables and events for use with Google Tag Manager.
+    * To set a trigger to occur whenever your custom event is called, on the Tag Manager dashboard, go to `Variables` and click `new` under `User-Defined Variables`. Here, all you have to do is choose a variable type of `Custom Event`, and give it the same name as the event you're pushing to the data layer ("myCustomEvent", above). This is now available as a trigger you can add to any tag.
+    * To configure a custom variable, do the same, but choose `Data Layer Variable`, giving it the name of your variable ("key", above). You can now access the value of this variable in the `Event Tracking Parameters` when you create a tag.
+
 ## Recommended Reading
 
 ### Books
