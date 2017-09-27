@@ -148,6 +148,68 @@ dataLayer.push({"event": "myCustomEvent"})
     * To set a trigger to occur whenever your custom event is called, on the Tag Manager dashboard, go to `Variables` and click `new` under `User-Defined Variables`. Here, all you have to do is choose a variable type of `Custom Event`, and give it the same name as the event you're pushing to the data layer ("myCustomEvent", above). This is now available as a trigger you can add to any tag.
     * To configure a custom variable, do the same, but choose `Data Layer Variable`, giving it the name of your variable ("key", above). You can now access the value of this variable in the `Event Tracking Parameters` when you create a tag.
 
+## How to set up Scroll Tracking with time on page
++ In order to see how much of your content users are actually seeing when they view your page it can be useful to track how far down the page they scroll. In order to give this context of how likely it is the user actually took any of this information in it is also useful to track the time they spent on the page. For example if they scrolled the whole length of the page but spent less than 10 seconds on the page, it's unlikely that they actually read any of the content.
++ The first thing we're going to be doing is setting up a custom HTML tag. This will allow us to put our own script into a tag.
++ To do this, go into Google Tag Manager, click on "Tags" in the sidebar, and then "New".
++ Select Custom HTML for the tag type
++ Paste in this code to the HTML box.
+```HTML
+<script>
+(function(){
+  var pageLoad = Date.now()
+
+  var scrollableHeight = document.body.scrollHeight - window.innerHeight;
+
+  var scrollPercent = 0;
+
+  var percentIncrement = 20;
+
+  window.addEventListener('scroll', function() {
+    var newScrollPercent = window.pageYOffset / scrollableHeight * 100;
+    if (newScrollPercent > scrollPercent) {
+      scrollPercent = newScrollPercent;
+    }
+  });
+
+  window.addEventListener('resize', function() {
+    scrollableHeight = document.body.scrollHeight - window.innerHeight;
+  })
+
+  window.addEventListener('beforeunload', function() {
+    var roundedDownToTwenty = Math.floor(scrollPercent / percentIncrement) * percentIncrement;
+    var timeOnPage = Date.now() - pageLoad;
+    var readableTimeOnPage = new Date(timeOnPage).toISOString().substr(-12, 7);
+    dataLayer.push({ event: 'scrollTracking', scrollDepth: roundedDownToTwenty, 'timeOnPage': readableTimeOnPage });
+  });
+})()
+</script>
+```
++ This code will keep track of how far down the page the user scrolls, rounded down to the nearest 20, if you want a different incrementaion then change the `percentIncrement` variable at the top of the script to your preferred incrementaion.
++  You're going to need to add a new trigger for this tag as well.
++ Click on the triggering section of the tag configuration window, then in the top right click the "+" symbol to add a new trigger.
++ We're going to set the trigger on the Window Loaded event, so that the tag only loads once everything else has, so we don't slow things down, so it the trigger set up select "Window Loaded", and leave "All Window Loaded Events" selected.
++ Name this trigger whatever you want, something referring the Google Tag Manager being loaded makes sense as a name though.
++ save the trigger, and then save your tag.
++ Now we're going to need to create some Data Layer variables as a way to keep track of the scroll depth and time spent on page.
++ Click on Variables in the GTM sidebar, then under User-Define Variables click new
++ Select "Data Layer Variable" under the Variable Configuration. Under "Data Layer Variable Name" type put `scrollDepth`. This has to match the stuff you put in the script, so it's important this is the same for the script we're using. You also need to give the data layer variable a name for GTM, I like to have the name at the top be the same as the Data Layer Variable name, for clarity's sake.
++ Check "Set Default Value" and type undefined.
++ Save the variable, then create another in the same way with the name `timeOnPage`
++ Now we need to create a trigger for the Event of the scroll tracking (in this case done when the user leaves the page)
++ Go into triggers, click "New" and selet "Custom Event".
++ Give it the name "scrollTracking". This has to match the event in our script. If you want to change this you'll have to change it in the script as well. Do this and save the trigger.
++ Finally we have to set up a tag to send this information to google analytics.
++ Create a new tag, configure it as Universal Analytics, and then select "Event" as the track type.
++ You can give any of these the names you want, and use the data layer variables as you please.
++ Our set up is:
+  + Category: Page Scroll tracking
+  + Action: {{scrollDepth}}%
+  + Label: URL: {{Page URL}}, Time on page: {{timeOnPage}}
++ You will also need to set "Non-Interaction Hit" to True. It will mess with your bounce rate if set to false.
++ All done! You can now preview, and publish your tags, and you'll be able to track how far people scroll, and how long they spend in your page on Google Analytics!
++ You can see this information in Google Analytics under "Real Time" and then "Events"
+
 ## Recommended Reading
 
 ### Books
