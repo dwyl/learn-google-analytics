@@ -120,6 +120,26 @@ For the Track Type, we want to use `Event`. When we select this, we're given a n
 6. You're done! You can now preview or publish your changes, and view the results on your analytics dashboard, in the `events` tab.  
 <img width="600" alt="screen shot 2017-06-01 at 11 27 17" src="https://cloud.githubusercontent.com/assets/8939909/26675852/4f779886-46bd-11e7-92b1-4318f18f0aae.png">
 
+### Custom Reports
+
+Now that you have some more detailed data, you might want to make it a little easier to view. Custom reports can be generated in Google analytics to group together key analytics you're interested in for quick and easy access.
+
+To create a custom report, click on `Customization` > `Custom reports` in the sidebar, then `+ New Custom Report`.
+
+<img width="600" alt="Custom Reports" src="https://user-images.githubusercontent.com/8939909/32664538-72b6533c-c629-11e7-83a5-8db0a16dc1a5.png">
+
+Here you'll see a few different settings. The Metric Groups are the data you're interested in viewing together, and the Dimension drilldown will determine how the data is grouped.
+
+So you can view all of your metrics (for example: page visits, avg. time on page, certain custom events), grouped by a particular dimension (browser, country, time of day etc).
+
+<img width="400" alt="Report Metrics" src="https://user-images.githubusercontent.com/8939909/32664821-4a62469c-c62a-11e7-94ad-af90b3859789.png">
+
+You can also add filters to your reports, to ensure you only see the data you're interested in, for example, you might only want to see data from users using a particular operating system.
+
+<img width="600" alt="Report Filters" src="https://user-images.githubusercontent.com/8939909/32664925-94f8fb7e-c62a-11e7-8d7c-fd204b7c4a6c.png">
+
+You can create more than one group of metrics to apply to the same dimension. You can also create multiple report tabs to keep related reports together.
+
 ### Data Layer
 
 For more advanced analytics, you may want to use the `dataLayer`. This requires a bit more javascript knowledge, but can allow for very flexible implementations that give you much greater control over what you track.
